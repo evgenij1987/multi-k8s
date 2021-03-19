@@ -20,3 +20,4 @@ after_success:
 - docker push evgenijavstein/multi-server
 - docker push evgenijavstein/multi-worker
 
+# end of file
