@@ -19,7 +19,7 @@ before_install:
 
 script:
   - docker run -e CI=true evgenijavstein/react-test npm test
-
+  
 deploy:
   provider: script
   script: bash ./deploy.sh
