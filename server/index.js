@@ -67,11 +67,13 @@ app.post('/values', async (req, res) => {
     text: 'INSERT INTO values(number) VALUES($1)',
     values: [index],
   }
+  console.log('pool obj:'+pool)
+
   pool.query(query, (err, res) => {
     if (err) {
-      console.log(err.stack)
+      console.log("Error:"+err.stack)
     } else {
-      console.log(res.rows[0])
+      console.log("Rows[0]"+res.rows[0])
     }
   })
 
