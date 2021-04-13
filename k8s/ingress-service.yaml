@@ -6,18 +6,35 @@ metadata:
     kubernetes.io/ingress.class: 'nginx'
     nginx.ingress.kubernetes.io/use-regex: 'true'
     nginx.ingress.kubernetes.io/rewrite-target: /$1
-    # UPDATE THIS LINE ABOVE
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
 spec:
-  rules:
-    - http:
+  tls:
+    - hosts:
+      - avstein.me
+      - www.avstein.me
+      secretName: avstein-me 
+
+rules:
+    - host: avstein.me
+      http:
         paths:
           - path: /?(.*)
-            # UPDATE THIS LINE ABOVE
             backend:
               serviceName: client-cluster-ip-service
               servicePort: 3000
           - path: /api/?(.*)
-            # UPDATE THIS LINE ABOVE
+            backend:
+              serviceName: server-cluster-ip-service
+              servicePort: 5000
+    - host: www.avstein.me
+      http:
+        paths:
+          - path: /?(.*)
+            backend:
+              serviceName: client-cluster-ip-service
+              servicePort: 3000
+          - path: /api/?(.*)
             backend:
               serviceName: server-cluster-ip-service
               servicePort: 5000
