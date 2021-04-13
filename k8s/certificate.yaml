@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1 
+kind: Certificate
+metadata:
+  name: avstein-me-tls
+spec:
+  secretName: avstein-me
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: avstein.me
+  dnsNames:
+    - avstein.me
+    - www.avstein.me
